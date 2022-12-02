@@ -9,57 +9,48 @@ import (
 	"strconv"
 )
 
-func getReeindeers(filename string) [][]int {
-	file, err := os.Open(filename)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	reindeers := make([][]int, 0)
-	curr := make([]int, 0)
+func aocDay1(input *os.File) (int, int) {
+	allElves := make([]int, 0)
+	currentElf := make([]int, 0)
+
+	scanner := bufio.NewScanner(input)
+
 	for scanner.Scan() {
-		line := scanner.Text()
-		t, err := strconv.Atoi(line)
-		if err != nil {
-			reindeers = append(reindeers, curr)
-			curr = make([]int, 0)
+		value := scanner.Text()
+		if value == "" {
+			sum := 0
+			for _, i := range currentElf {
+				sum += i
+			}
+			allElves = append(allElves, sum)
+			currentElf = []int{}
 		} else {
-			curr = append(curr, t)
+			cal, err := strconv.Atoi(value)
+			if err != nil {
+				log.Fatal(err)
+			}
+			currentElf = append(currentElf, cal)
 		}
 	}
-	err = scanner.Err()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	reindeers = append(reindeers, curr)
-	return reindeers
-}
 
-func sumCalories(reindeers [][]int) []int {
-	cal := make([]int, 0)
-	for _, reindeer := range reindeers {
-		sum := 0
-		for _, i := range reindeer {
-			sum += i
-		}
-		cal = append(cal, sum)
-	}
-	sort.Slice(cal, func(i, j int) bool {
-		return cal[i] > cal[j]
-	})
+	sort.Ints(allElves)
+	part1 := allElves[len(allElves)-1]
 
-	return cal
+	sum := 0
+	for _, i := range allElves[len(allElves)-3:] {
+		sum += i
+	}
+	part2 := sum
+
+	return part1, part2
 }
 
 func main() {
-	reindeers := getReeindeers("input.txt")
-	cals := sumCalories(reindeers)
-	fmt.Println(cals[0])
-	total := 0
-	for _, i := range cals[:3] {
-		total += i
+	file, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Println(total)
+	defer file.Close()
+	part1, part2 := aocDay1(file)
+	fmt.Printf("Answer part 1: %v\nAnswer part 2: %v\n", part1, part2)
 }
