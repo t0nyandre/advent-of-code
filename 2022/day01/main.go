@@ -7,6 +7,8 @@ import (
 	"os"
 	"sort"
 	"strconv"
+
+	"github.com/t0nyandre/advent-of-code/utils"
 )
 
 func aocDay1(input *os.File) (int, int) {
@@ -18,10 +20,7 @@ func aocDay1(input *os.File) (int, int) {
 	for scanner.Scan() {
 		value := scanner.Text()
 		if value == "" {
-			sum := 0
-			for _, i := range currentElf {
-				sum += i
-			}
+			sum := utils.Sum(currentElf)
 			allElves = append(allElves, sum)
 			currentElf = []int{}
 		} else {
@@ -35,12 +34,7 @@ func aocDay1(input *os.File) (int, int) {
 
 	sort.Ints(allElves)
 	part1 := allElves[len(allElves)-1]
-
-	sum := 0
-	for _, i := range allElves[len(allElves)-3:] {
-		sum += i
-	}
-	part2 := sum
+	part2 := utils.Sum(allElves[len(allElves)-3:])
 
 	return part1, part2
 }
