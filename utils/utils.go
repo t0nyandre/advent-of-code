@@ -8,3 +8,12 @@ func Sum(array []int) int {
 	}
 	return sum
 }
+
+func Contains(array []string, i string) bool {
+	for _, a := range array {
+		if a == i {
+			return true
+		}
+	}
+	return false
+}
