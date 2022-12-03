@@ -12,43 +12,61 @@ import (
 
 const priority = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-func aocDay3(input *os.File) (int, int) {
-	sum := 0
-	compartment1 := []string{}
-	compartment2 := []string{}
-	pri := []string{}
+func part1(input []string) int {
+	var (
+		sum          int = 0
+		compartment1 []string
+		compartment2 []string
+	)
 
-	scanner := bufio.NewScanner(input)
-	for scanner.Scan() {
-		rucksack := scanner.Text()
-		length := len(rucksack)
-		compartment1 = strings.Split(rucksack[:(length/2)], "")
-		compartment2 = strings.Split(rucksack[(length/2):], "")
-		rucksackPri := []string{}
+	for _, rucksack := range input {
+		items := []string{}
+		compartment1 = strings.Split(rucksack[:(len(rucksack)/2)], "")
+		compartment2 = strings.Split(rucksack[(len(rucksack)/2):], "")
+
 		for _, x := range compartment1 {
 			if utils.Contains(compartment2, x) {
-				if len(rucksackPri) < 1 || rucksackPri[len(rucksackPri)-1] != x {
-					rucksackPri = append(rucksackPri, x)
+				if len(items) < 1 || items[len(items)-1] != x {
+					items = append(items, x)
 				}
 			}
 		}
-		pri = append(pri, rucksackPri...)
+		sum += strings.Index(priority, items[len(items)-1]) + 1
 	}
 
-	for _, i := range pri {
-		sum += strings.Index(priority, i) + 1
+	return sum
+}
+
+func part2(input []string) int {
+	sum := 0
+
+	elves := utils.Chunks(input, 3)
+	b := []string{}
+	for _, i := range elves {
+		b = strings.Split(i[0], "")
+		for _, j := range b {
+			if utils.Contains(strings.Split(i[1], ""), j) && utils.Contains(strings.Split(i[2], ""), j) {
+				sum += strings.Index(priority, j) + 1
+				break
+			}
+		}
 	}
 
-	part1 := sum
-	part2 := 0
-	return part1, part2
+	return sum
 }
 
 func main() {
+	var input []string
 	file, err := os.Open("input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
-	fmt.Println(aocDay3(file))
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		input = append(input, scanner.Text())
+	}
+
+	fmt.Println(part1(input), part2(input))
 }

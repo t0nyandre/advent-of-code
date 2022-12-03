@@ -17,3 +17,17 @@ func Contains(array []string, i string) bool {
 	}
 	return false
 }
+
+func Chunks(slice []string, size int) [][]string {
+	var chunks [][]string
+	for i := 0; i < len(slice); i += size {
+		end := i + size
+		if end > len(slice) {
+			end = len(slice)
+		}
+
+		chunks = append(chunks, slice[i:end])
+	}
+
+	return chunks
+}
