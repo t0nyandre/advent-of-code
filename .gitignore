@@ -11,3 +11,4 @@ go.work
 .directory
 .Trash-*
 .nfs*
+*.txt
