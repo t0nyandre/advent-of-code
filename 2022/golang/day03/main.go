@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/t0nyandre/advent-of-code/utils"
+	"github.com/t0nyandre/advent-of-code/tree/main/2022/golang/utils"
 )
 
 const priority = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

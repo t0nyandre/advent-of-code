@@ -1,3 +1,3 @@
-module github.com/t0nyandre/advent-of-code
+module github.com/t0nyandre/advent-of-code/tree/main/2022/golang
 
-go 1.19
+go 1.18

@@ -1,9 +1,11 @@
-package aoc2023
+package Day04
 
 import println
 import readInput
 
 fun main() {
+    val day = "Day04"
+
     fun getNumbers(input: String): Pair<ArrayList<String>, ArrayList<String>> {
         val card = input.split(":")[1].split("|")
         val winningNumbers = ArrayList(card[0].split(" "))
@@ -55,7 +57,7 @@ fun main() {
         return copies.sum()
     }
 
-    val input = readInput("Day04")
+    val input = readInput("Day04", day)
     part1(input).println()
     part2(input).println()
 }

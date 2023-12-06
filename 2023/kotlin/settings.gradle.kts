@@ -1,4 +1,4 @@
-rootProject.name = "AOC2023 in Kotlin"
+rootProject.name = "aoc23 in kotlin"
 
 dependencyResolutionManagement {
     repositories {

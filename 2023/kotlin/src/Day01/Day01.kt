@@ -1,4 +1,11 @@
+package Day01
+
+import readInput
+import println
+
 fun main() {
+    val day = "Day01"
+
     val words: Map<String, Int> = mapOf(
         "one" to 1,
         "two" to 2,
@@ -36,7 +43,7 @@ fun main() {
             )
         }
 
-    val input = readInput("Day01")
+    val input = readInput("Day01", day)
     part1(input).println()
     part2(input).println()
 }

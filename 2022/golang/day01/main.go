@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/t0nyandre/advent-of-code/utils"
+	"github.com/t0nyandre/advent-of-code/tree/main/2022/golang/utils"
 )
 
 func aocDay1(input *os.File) (int, int) {
