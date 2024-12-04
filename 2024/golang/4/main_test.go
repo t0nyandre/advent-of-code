@@ -51,7 +51,7 @@ func Test_Day4(t *testing.T) {
 	t.Run("Part2", func(t *testing.T) {
 		got := part2(input)
 		// Please change the expected value
-		expected := 0
+		expected := 2046
 
 		if got != expected {
 			t.Errorf("expected '%v' but got '%v'", expected, got)
